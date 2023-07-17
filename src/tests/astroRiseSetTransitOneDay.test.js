@@ -3,21 +3,21 @@
 /* eslint-disable brace-style */
 /* eslint-disable semi */
 /* eslint-disable new-cap */
-import {AstronomicalData, ASTRONOMICAL_DATA_EVENTS} from '../astronomicalDataService.mjs';
+import {AstroDataRSTOneDay, ASTRONOMICAL_DATA_EVENTS} from '../astroRiseSetTransitOneDay.mjs';
 import _is from 'is-it-check';
 
 describe('Module-level tests', ()=>{
     test('Module TimeTriggers export expected value', ()=>{
-        const astroData = new AstronomicalData();
-        expect(astroData).toBeInstanceOf(AstronomicalData);
+        const astroData = new AstroDataRSTOneDay();
+        expect(astroData).toBeInstanceOf(AstroDataRSTOneDay);
     });
 });
 
-describe('AstronomicalData class tests', ()=>{
+describe('AstroDataRSTOneDay class tests', ()=>{
     describe('Instance function/property valid tests', ()=>{
         let astroData;
         beforeAll(()=>{
-            astroData = new AstronomicalData();
+            astroData = new AstroDataRSTOneDay();
         });
         // API Tests
         test('RawData', ()=>{
@@ -69,44 +69,92 @@ describe('AstronomicalData class tests', ()=>{
         test('LunarTransit', ()=>{
             expect(astroData).toHaveProperty('LunarTransit');
         });
+        test('ObjectData', ()=>{
+            expect(astroData).toHaveProperty('ObjectData');
+        });
+        test('ObjectData-Valid', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('valid');
+        });
+        test('ObjectData-Version', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('version');
+        });
+        test('ObjectData-Type', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('type');
+        });
+        test('ObjectData-Date', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('date');
+        });
+        test('ObjectData-Latitude', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('latitude');
+        });
+        test('ObjectData-Longitude', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('longitude');
+        });
+        test('ObjectData-LunarPhase', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('lunar_phase');
+        });
+        test('ObjectData-TwilightStart', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('twilight_start');
+        });
+        test('ObjectData-TwilightEnd', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('twilight_end');
+        });
+        test('ObjectData-SolarRise', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('solar_rise');
+        });
+        test('ObjectData-SolarSet', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('solar_set');
+        });
+        test('ObjectData-SolarTransit', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('solar_transit');
+        });
+        test('ObjectData-LunarRise', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('lunar_rise');
+        });
+        test('ObjectData-LunarSet', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('lunar_set');
+        });
+        test('ObjectData-LunarTransit', ()=>{
+            expect(astroData.ObjectData).toHaveProperty('lunar_transit');
+        });
         test('RequestAstronomicalOneDayData', ()=>{
             expect(astroData).toHaveProperty('RequestAstronomicalOneDayData');
         });
         test('CheckLocation', ()=>{
-            expect(AstronomicalData).toHaveProperty('CheckLocation');
+            expect(AstroDataRSTOneDay).toHaveProperty('CheckLocation');
         });
     });
     describe('Instance function/property invalid tests', ()=>{
         test('Invalid config', ()=>{
             function astroNoLoc() {
-                const test = AstronomicalData.CheckLocation();
+                const test = AstroDataRSTOneDay.CheckLocation();
             };
             function astroNoLoc2() {
-                const test = AstronomicalData.CheckLocation({pancakes: {latitude: 42, longitude: -72}});
+                const test = AstroDataRSTOneDay.CheckLocation({pancakes: {latitude: 42, longitude: -72}});
             };
             function astroBadLoc1() {
-                const test = AstronomicalData.CheckLocation(7);
+                const test = AstroDataRSTOneDay.CheckLocation(7);
             };
             function astroBadLoc2() {
-                const test = AstronomicalData.CheckLocation('waffles');
+                const test = AstroDataRSTOneDay.CheckLocation('waffles');
             };
             function astroNoLatitude() {
-                const test = AstronomicalData.CheckLocation({location: {longitude: -72}});
+                const test = AstroDataRSTOneDay.CheckLocation({location: {longitude: -72}});
             };
             function astroNoLongitude() {
-                const test = AstronomicalData.CheckLocation({locatin: {latitude: 42}});
+                const test = AstroDataRSTOneDay.CheckLocation({locatin: {latitude: 42}});
             };
             function astroLowLatitude() {
-                const test = AstronomicalData.CheckLocation({location: {latitude: -91, longitude: -72}});
+                const test = AstroDataRSTOneDay.CheckLocation({location: {latitude: -91, longitude: -72}});
             };
             function astroHighLatitude() {
-                const test = AstronomicalData.CheckLocation({location: {latitude: 91, longitude: -72}});
+                const test = AstroDataRSTOneDay.CheckLocation({location: {latitude: 91, longitude: -72}});
             };
             function astroLowLongitude() {
-                const test = AstronomicalData.CheckLocation({location: {latitude: 42, longitude: -181}});
+                const test = AstroDataRSTOneDay.CheckLocation({location: {latitude: 42, longitude: -181}});
             };
             function astroHighLongitude() {
-                const test = AstronomicalData.CheckLocation({location: {latitude: 42, longitude: 181}});
+                const test = AstroDataRSTOneDay.CheckLocation({location: {latitude: 42, longitude: 181}});
             };
             expect(astroNoLoc).toThrow(TypeError);
             expect(astroNoLoc2).toThrow(TypeError);
@@ -167,6 +215,9 @@ describe('AstronomicalData class tests', ()=>{
 
                         // Longitude
                         expect(Math.abs(astroData.Longitude-config.location.longitude)).toBeLessThanOrEqual(0.001);
+
+                        // Object Data
+                        expect(_is.object(astroData.ObjectData)).toBe(true);
                     }
                     else {
                         expect(astroData.Type).toBe(undefined);
@@ -180,7 +231,7 @@ describe('AstronomicalData class tests', ()=>{
 
                 // Initiate the test.
                 const processingNotifications = [];
-                const astroData = new AstronomicalData();
+                const astroData = new AstroDataRSTOneDay();
                 astroData.on(ASTRONOMICAL_DATA_EVENTS.EVENT_DATA_PROCESSING, handleDataProcessing);
                 astroData.on(ASTRONOMICAL_DATA_EVENTS.EVENT_DATA_PROCESS_COMPLETE, handleDataComplete);
                 // Decouple the start.
