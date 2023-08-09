@@ -1,9 +1,15 @@
+// External dependencies and imports.
+import EventEmitter from 'events';
+import _debugModule from 'debug';
+import _is from 'is-it-check';
+import _https from 'node:https';
+
 /* eslint-disable new-cap */
 /**
- * @description Manages astronomical data using services from the US Naval Observatory @see {@link https://aa.usno.navy.mil}
+ * @description Manages rise, set, transit astronomical data for one day using services from the US Naval Observatory @see {@link https://aa.usno.navy.mil}
  * @copyright 2023-2023
  * @author Mike Price <dev.grumptech@gmail.com>
- * @module AstronomicalDataModule
+ * @module AstroRSTDataOneDay
  * @requires events
  * @see {@link https://nodejs.org/dist/latest-v16.x/docs/api/events.html#events}
  * @requires debug
@@ -12,13 +18,8 @@
  * @see {@link https://github.com/evdama/is-it-check}
  * @requires https
  * @see {@link https://nodejs.org/dist/latest-v18.x/docs/api/https.html#https}
+ * @private
  */
-
-// External dependencies and imports.
-import EventEmitter from 'events';
-import _debugModule from 'debug';
-import _is from 'is-it-check';
-import _https from 'node:https';
 
 /**
  * @description Debugging function pointer for runtime related diagnostics.
@@ -65,14 +66,14 @@ export const ASTRONOMICAL_DATA_EVENTS = {
 
 /**
  * @description Astronomical Data Processing
- * @event module:AstronomicalDataModule#event:astronomical_data_processing
+ * @event module:AstroRSTDataOneDay#event:astronomical_data_processing
  * @type {object}
  * @param {boolean} e.processing -Flag indicating the astronomical data is being updated.
  * @private
  */
 /**
  * @description Astronomical Data Process Complete
- * @event module:AstronomicalDataModule#event:astronomical_data_process_complete
+ * @event module:AstroRSTDataOneDay#event:astronomical_data_process_complete
  * @type {object}
  * @param {boolean} e.status -Flag indicating the is the data was successfully processed.
  * @private
@@ -80,8 +81,9 @@ export const ASTRONOMICAL_DATA_EVENTS = {
 /**
  * @description Astronomical Data
  * @augments EventEmitter
+ * @private
  */
-export class AstronomicalData extends EventEmitter {
+export class AstroDataRSTOneDay extends EventEmitter {
     /**
      * @description Constructor
      * @param {object} config - Configuration data (Not used)
@@ -304,6 +306,34 @@ export class AstronomicalData extends EventEmitter {
     }
 
     /**
+     * @description Read only accessor for the data as an object.
+     * @returns {object} - Data as an object.
+     */
+    get ObjectData() {
+        /* eslint-disable indent */
+        const data = {
+            valid: this.Valid,
+            version: this.APIVersion,
+            type: this.Type,
+            date: this.Date,
+            latitude: this.Latitude,
+            longitude: this.Longitude,
+            lunar_phase: this.LunarPhase,
+            twilight_start: this.TwilightStart,
+            twilight_end: this.TwilightEnd,
+            solar_rise: this.SolarRise,
+            solar_set: this.SolarSet,
+            solar_transit: this.SolarTransit,
+            lunar_rise: this.LunarRise,
+            lunar_set: this.LunarSet,
+            lunar_transit: this.LunarTransit,
+        };
+        /* eslint-enable indent */
+
+        return data;
+    }
+
+    /**
      * @description Helper for requesting and collecting astronomical point data.
      * @param {object} config - Configuration data
      * @param {string=} config.id - Identifier used for the request. If not specified use 'GrmpTec'.
@@ -314,8 +344,8 @@ export class AstronomicalData extends EventEmitter {
      * @throws {TypeError} - Thrown if 'config' is invalid.
      * @throws {RangeError} - Thrown if 'config' is invalid.
      * @returns {void}
-     * @fires module:AstronomicalDataModule#event:astronomical_data_processing
-     * @fires module:AstronomicalDataModule#event:astronomical_data_complete
+     * @fires module:AstroRSTDataOneDay#event:astronomical_data_processing
+     * @fires module:AstroRSTDataOneDay#event:astronomical_data_complete
      */
     RequestAstronomicalOneDayData(config) {
         const MARKER_ID = '{ID}';
@@ -339,7 +369,7 @@ export class AstronomicalData extends EventEmitter {
                 throw new RangeError(`Invalid configuration. Date=${config.date}`);
             }
             // Validate the location
-            AstronomicalData.CheckLocation(config);
+            AstroDataRSTOneDay.CheckLocation(config);
         }
         else {
             throw new TypeError(`config is unspecified.`);
