@@ -1,7 +1,7 @@
 {
   "name": "grumptech-astrodata",
   "displayName": "Astro Data",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Provides information on astronomical events",
   "type": "module",
   "main": "dist/grumptech-astrodata.js",
