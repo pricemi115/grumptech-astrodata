@@ -31,7 +31,7 @@
     <input type="text" id="nav-search" placeholder="Search" />
     
     
-    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/pricemi115/grumptech-astrodata" target="_blank" >GrumpTech</a></h2><h3>Modules</h3><ul><li><a href="module-AstronomicalDataAPIModule.html">AstronomicalDataAPIModule</a><ul class='members'><li data-type='member' style='display: none;'><a href="module-AstronomicalDataAPIModule.html#.API_ASTRONOMICAL_DATA_EVENTS">API_ASTRONOMICAL_DATA_EVENTS</a></li></ul></li></ul><h3>Events</h3><ul><li><a href="module-AstronomicalDataAPIModule.html#event:event:busy">busy</a></li><li><a href="module-AstronomicalDataAPIModule.html#event:event:request_complete">request_complete</a></li></ul><h3>Classes</h3><ul><li><a href="module-AstronomicalDataAPIModule.AstronomicalDataAPI.html">AstronomicalDataAPI</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-AstronomicalDataAPIModule.AstronomicalDataAPI.html#RequestAstronomicalOneDayData">RequestAstronomicalOneDayData</a></li></ul></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-license.html">license</a></li><li><a href="tutorial-security.html">security</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/pricemi115/grumptech-astrodata" target="_blank" >GrumpTech</a></h2><h3>Modules</h3><ul><li><a href="module-AstronomicalDataAPIModule.html">AstronomicalDataAPIModule</a><ul class='members'><li data-type='member' style='display: none;'><a href="module-AstronomicalDataAPIModule.html#.API_ASTRONOMICAL_DATA_EVENTS">API_ASTRONOMICAL_DATA_EVENTS</a></li></ul></li></ul><h3>Events</h3><ul><li><a href="module-AstronomicalDataAPIModule.html#event:event:busy">busy</a></li><li><a href="module-AstronomicalDataAPIModule.html#event:event:request_complete">request_complete</a></li></ul><h3>Classes</h3><ul><li><a href="module-AstronomicalDataAPIModule.AstronomicalDataAPI.html">AstronomicalDataAPI</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-AstronomicalDataAPIModule.AstronomicalDataAPI.html#IsLocationValid">IsLocationValid</a></li><li data-type='method' style='display: none;'><a href="module-AstronomicalDataAPIModule.AstronomicalDataAPI.html#RequestAstronomicalOneDayData">RequestAstronomicalOneDayData</a></li></ul></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-license.html">license</a></li><li><a href="tutorial-security.html">security</a></li></ul>
     
 </nav>
 
@@ -323,6 +323,240 @@
 
     
 
+    <h4 class="name" id="IsLocationValid"><span class="type-signature"></span>IsLocationValid<span class="signature">(location)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Validates the location specified.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main.mjs.html">main.mjs</a>, <a href="main.mjs.html#line190">line 190</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Location for the astronomical data.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>latitude</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Latitude</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>longitude</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>longitude</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>true if the specified location is valid.</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id="RequestAstronomicalOneDayData"><span class="type-signature"></span>RequestAstronomicalOneDayData<span class="signature">(config)</span><span class="type-signature"> &rarr; {void}</span></h4>
 
     
@@ -339,7 +573,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.mjs.html">main.mjs</a>, <a href="main.mjs.html#line152">line 152</a>
+        <a href="main.mjs.html">main.mjs</a>, <a href="main.mjs.html#line153">line 153</a>
     </li></ul></dd>
     
 
@@ -452,6 +686,40 @@
     </thead>
 
     <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Identifier for the request to the US Naval Observatory</p></td>
+        </tr>
+
     
 
         <tr>

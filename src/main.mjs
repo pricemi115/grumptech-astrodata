@@ -58,7 +58,7 @@ export const API_ASTRONOMICAL_DATA_EVENTS = {
  * @description Astronomical Data Request Complete
  * @event module:AstronomicalDataAPIModule#event:request_complete
  * @type {object}
- * @param {boolean} e.status - Flag indicating the is the data was successfully processed.
+ * @param {boolean} e.status - Flag indicating the is the processing resulted in an error.
  * @param {object} e.data - Object containing data of interest (request specific).
  */
 /**
@@ -139,6 +139,7 @@ export class AstronomicalDataAPI extends EventEmitter {
     /**
      * @description Helper for requesting and collecting astronomical point data.
      * @param {object} config - Configuration data
+     * @param {string=} config.id - Identifier for the request to the US Naval Observatory
      * @param {Date=} config.date - Observation Date. If not specified use current time.
      * @param {object} config.location - Location for the astronomical data.
      * @param {number} config.location.latitude - Latitude
@@ -170,11 +171,35 @@ export class AstronomicalDataAPI extends EventEmitter {
         }
 
         // Append the id field to the configuration.
-        config.id = `GTAstro`;
+        if (_is.undefined(config.id)) {
+            config.id = `GTAstro`;
+        }
 
         // Initiate the request
         // eslint-disable-next-line new-cap
         this._astroRSTOneDay.RequestAstronomicalOneDayData(config);
+    }
+
+    /**
+     * @description Validates the location specified.
+     * @param {object} location - Location for the astronomical data.
+     * @param {number} location.latitude - Latitude
+     * @param {object} location.longitude - longitude
+     * @returns {boolean} - true if the specified location is valid.
+     */
+    IsLocationValid(location) {
+        let valid = false;
+
+        try {
+            // eslint-disable-next-line new-cap
+            AstroDataRSTOneDay.CheckLocation({location: location});
+            valid = true;
+        }
+        finally {
+            // Nothing to do.
+        }
+
+        return valid;
     }
 
     /**

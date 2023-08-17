@@ -22,6 +22,7 @@ The module provides the following application programming interface.
 * **Version**: Read only property for the module version.
 * **RSTOneDayData**: Read only property for the result of the most recent request for One Day Data.
 * **RequestAstronomicalOneDayData**: Initiates a request for astronomical data according to the API provided by the [United States Naval Observatory](https://aa.usno.navy.mil/data/api).
+* **IsLocationValid**: Validates the location latitude and longitude provided.
 ### Events
 The module publishes the following events:
 * **API_ASTRONOMICAL_DATA_EVENTS.API_EVENT_DATA_BUSY** ('busy'): Event fired when the busy state changes.
