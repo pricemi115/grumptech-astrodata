@@ -4,6 +4,10 @@ Change history for _grumptech-astrodata_
 ---
 ---
 
+## [1.1.1] - 2025-AUG-31
+### What's new
+- Updating dependencies
+---
 ## [1.1.0] - 2023-AUG-16
 ### What's new
 - Updating API to allow user to validate location latitude and longitude.
