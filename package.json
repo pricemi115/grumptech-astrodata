@@ -1,7 +1,7 @@
 {
   "name": "grumptech-astrodata",
   "displayName": "Astro Data",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Provides information on astronomical events",
   "type": "module",
   "main": "dist/grumptech-astrodata.js",
@@ -47,7 +47,7 @@
   "license": "MIT",
   "dependencies": {
     "debug": "^4.4.3",
-    "is-it-check": "^1.0.12"
+    "is-it-check": "^1.1.1"
   },
   "devDependencies": {
     "docdash": "^2.0.2",
@@ -59,7 +59,7 @@
     "eslint-plugin-promise": "^7.2.1",
     "jest": "^30.2.0",
     "jsdoc": "^4.0.5",
-    "string-replace-loader": "^3.1.0",
+    "string-replace-loader": "^3.2.0",
     "webpack": "^5.102.1",
     "webpack-cli": "^6.0.1"
   }
